@@ -6,12 +6,12 @@ import 'package:murmur/repositories/insight_repository_impl.dart';
 import 'package:murmur/repositories/journal_repository.dart';
 import 'package:murmur/repositories/journal_repository_impl.dart';
 
-import '../../data/datasources/isar_service.dart';
+import 'package:murmur/data/datasources/isar_service.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> setupDependencies() async {
-  getIt.registerSingletonAsync<Isar>(() => IsarService.getInstance());
+  getIt.registerSingletonAsync<Isar>(IsarService.getInstance);
 
   getIt.registerSingletonWithDependencies<JournalRepository>(
     () => JournalRepositoryImpl(getIt<Isar>()),

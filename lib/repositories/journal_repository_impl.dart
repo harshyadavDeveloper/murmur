@@ -2,7 +2,7 @@ import 'package:isar_community/isar.dart';
 import 'package:murmur/data/models/journal_entry_model.dart';
 import 'package:murmur/repositories/journal_repository.dart';
 
-import '../../domain/entities/journal_entry_entity.dart';
+import 'package:murmur/domain/entities/journal_entry_entity.dart';
 
 class JournalRepositoryImpl implements JournalRepository {
   final Isar _isar;

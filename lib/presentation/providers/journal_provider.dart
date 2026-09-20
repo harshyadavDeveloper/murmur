@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:murmur/repositories/journal_repository.dart';
 
-import '../../domain/entities/journal_entry_entity.dart';
+import 'package:murmur/domain/entities/journal_entry_entity.dart';
 
 class JournalProvider extends ChangeNotifier {
   final JournalRepository _repository;

@@ -4,7 +4,7 @@ import 'package:murmur/presentation/screens/home/home_screen.dart';
 import 'package:murmur/repositories/journal_repository.dart';
 import 'package:provider/provider.dart';
 
-import '../core/di/injection.dart';
+import 'package:murmur/core/di/injection.dart';
 
 class MurmurApp extends StatelessWidget {
   const MurmurApp({super.key});

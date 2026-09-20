@@ -2,7 +2,7 @@ import 'package:isar_community/isar.dart';
 import 'package:murmur/data/models/weekly_insight_model.dart';
 import 'package:murmur/repositories/insight_repository.dart';
 
-import '../../domain/entities/weekly_insight_entity.dart';
+import 'package:murmur/domain/entities/weekly_insight_entity.dart';
 
 class InsightRepositoryImpl implements InsightRepository {
   final Isar _isar;

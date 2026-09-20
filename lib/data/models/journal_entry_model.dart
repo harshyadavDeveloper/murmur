@@ -1,6 +1,6 @@
 import 'package:isar_community/isar.dart';
 
-import '../../domain/entities/journal_entry_entity.dart';
+import 'package:murmur/domain/entities/journal_entry_entity.dart';
 
 part 'journal_entry_model.g.dart';
 

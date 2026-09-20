@@ -1,6 +1,6 @@
 import 'package:isar_community/isar.dart';
 
-import '../../domain/entities/weekly_insight_entity.dart';
+import 'package:murmur/domain/entities/weekly_insight_entity.dart';
 
 part 'weekly_insight_model.g.dart';
 
