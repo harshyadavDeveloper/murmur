@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:isar_community/isar.dart';
+import 'package:murmur/presentation/providers/journal_provider.dart';
 import 'package:murmur/repositories/insight_repository.dart';
 import 'package:murmur/repositories/insight_repository_impl.dart';
 import 'package:murmur/repositories/journal_repository.dart';
@@ -20,6 +21,10 @@ Future<void> setupDependencies() async {
   getIt.registerSingletonWithDependencies<InsightRepository>(
     () => InsightRepositoryImpl(getIt<Isar>()),
     dependsOn: [Isar],
+  );
+
+  getIt.registerFactory<JournalProvider>(
+    () => JournalProvider(getIt<JournalRepository>()),
   );
 
   await getIt.allReady();
