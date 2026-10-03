@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:murmur/presentation/providers/journal_provider.dart';
+import 'package:smart_date_formatter/smart_date_formatter.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -36,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                subtitle: Text(entry.createdAt.toString()),
+                subtitle: Text(entry.createdAt.timeAgo),
               );
             },
           );
