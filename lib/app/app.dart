@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:murmur/data/insights/insight_engine.dart';
 import 'package:murmur/presentation/providers/journal_provider.dart';
 import 'package:murmur/presentation/screens/home/home_screen.dart';
 import 'package:murmur/repositories/journal_repository.dart';
@@ -14,8 +15,10 @@ class MurmurApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) =>
-              JournalProvider(getIt<JournalRepository>())..loadEntries(),
+          create: (_) => JournalProvider(
+            getIt<JournalRepository>(),
+            getIt<InsightEngine>(),
+          )..loadEntries(),
         ),
       ],
       child: MaterialApp(

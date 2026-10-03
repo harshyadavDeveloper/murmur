@@ -1,5 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:isar_community/isar.dart';
+import 'package:murmur/data/insights/insight_engine.dart';
+import 'package:murmur/data/insights/local_lexicon_engine.dart';
 import 'package:murmur/presentation/providers/journal_provider.dart';
 import 'package:murmur/repositories/insight_repository.dart';
 import 'package:murmur/repositories/insight_repository_impl.dart';
@@ -23,8 +25,10 @@ Future<void> setupDependencies() async {
     dependsOn: [Isar],
   );
 
+  getIt.registerLazySingleton<InsightEngine>(LocalLexiconEngine.new);
+
   getIt.registerFactory<JournalProvider>(
-    () => JournalProvider(getIt<JournalRepository>()),
+    () => JournalProvider(getIt<JournalRepository>(), getIt<InsightEngine>()),
   );
 
   await getIt.allReady();

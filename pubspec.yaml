@@ -45,6 +45,7 @@ dependencies:
   fl_chart: ^1.2.0
   path_provider: ^2.1.6
   dart_sentiment: ^0.0.9
+  smart_date_formatter: ^2.6.0
 
 dev_dependencies:
   flutter_test:
