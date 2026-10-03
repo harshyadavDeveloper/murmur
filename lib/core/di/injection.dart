@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:isar_community/isar.dart';
+import 'package:murmur/data/datasources/speech_service.dart';
 import 'package:murmur/data/insights/insight_engine.dart';
 import 'package:murmur/data/insights/local_lexicon_engine.dart';
 import 'package:murmur/presentation/providers/journal_provider.dart';
@@ -24,6 +25,8 @@ Future<void> setupDependencies() async {
     () => InsightRepositoryImpl(getIt<Isar>()),
     dependsOn: [Isar],
   );
+
+  getIt.registerLazySingleton<SpeechService>(SpeechService.new);
 
   getIt.registerLazySingleton<InsightEngine>(LocalLexiconEngine.new);
 

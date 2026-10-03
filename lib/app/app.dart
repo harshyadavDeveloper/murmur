@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:murmur/data/datasources/speech_service.dart';
 import 'package:murmur/data/insights/insight_engine.dart';
 import 'package:murmur/presentation/providers/journal_provider.dart';
+import 'package:murmur/presentation/providers/recording_provider.dart';
 import 'package:murmur/presentation/providers/search_provider.dart';
 import 'package:murmur/presentation/screens/home/home_screen.dart';
 import 'package:murmur/repositories/journal_repository.dart';
@@ -20,6 +22,9 @@ class MurmurApp extends StatelessWidget {
             getIt<JournalRepository>(),
             getIt<InsightEngine>(),
           )..loadEntries(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => RecordingProvider(getIt<SpeechService>()),
         ),
         ChangeNotifierProvider(
           create: (_) => SearchProvider(getIt<JournalRepository>()),

@@ -10,7 +10,8 @@ class RecordingProvider extends ChangeNotifier {
   String _transcript = '';
   String get transcript => _transcript;
 
-  bool get isListening => _speechService.isListening;
+  bool _isListening = false;
+  bool get isListening => _isListening;
 
   Future<bool> requestMicPermission() async {
     final status = await Permission.microphone.request();
@@ -21,26 +22,37 @@ class RecordingProvider extends ChangeNotifier {
     final hasPermission = await requestMicPermission();
     if (!hasPermission) return;
 
-    final ready = await _speechService.initialize();
+    final ready = await _speechService.initialize(
+      onStatus: (status) {
+        if (status == 'done' || status == 'notListening') {
+          _isListening = false;
+          notifyListeners();
+        }
+      },
+    );
     if (!ready) return;
 
     _transcript = '';
+    _isListening = true;
+    notifyListeners();
+
     await _speechService.startListening(
       onResult: (text) {
         _transcript = text;
         notifyListeners();
       },
     );
-    notifyListeners();
   }
 
   Future<void> stopRecording() async {
     await _speechService.stopListening();
+    _isListening = false;
     notifyListeners();
   }
 
   void reset() {
     _transcript = '';
+    _isListening = false;
     notifyListeners();
   }
 }

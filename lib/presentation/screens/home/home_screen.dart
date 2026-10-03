@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:murmur/presentation/screens/record/record_screen.dart';
 import 'package:murmur/presentation/screens/search/search_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -59,7 +60,10 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // recording screen — wired up in the next step
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const RecordScreen()),
+          );
         },
         child: const Icon(Icons.add),
       ),

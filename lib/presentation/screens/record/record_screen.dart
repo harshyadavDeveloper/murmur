@@ -26,31 +26,43 @@ class RecordScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                IconButton(
-                  iconSize: 72,
-                  icon: Icon(
-                    recording.isListening ? Icons.stop_circle : Icons.mic,
-                    color: recording.isListening ? Colors.red : Colors.indigo,
+                SizedBox(
+                  height: 120,
+                  child: Center(
+                    child: IconButton(
+                      iconSize: 72,
+                      icon: Icon(
+                        recording.isListening ? Icons.stop_circle : Icons.mic,
+                        color: recording.isListening
+                            ? Colors.red
+                            : Colors.indigo,
+                      ),
+                      onPressed: () async {
+                        if (recording.isListening) {
+                          await recording.stopRecording();
+                        } else {
+                          await recording.startRecording();
+                        }
+                      },
+                    ),
                   ),
-                  onPressed: () async {
-                    if (recording.isListening) {
-                      await recording.stopRecording();
-                    } else {
-                      await recording.startRecording();
-                    }
-                  },
                 ),
-                if (recording.transcript.isNotEmpty && !recording.isListening)
-                  ElevatedButton(
-                    onPressed: () async {
-                      await context.read<JournalProvider>().saveEntry(
-                        recording.transcript,
-                      );
-                      recording.reset();
-                      if (context.mounted) Navigator.pop(context);
-                    },
-                    child: const Text('Save entry'),
-                  ),
+                SizedBox(
+                  height: 48,
+                  child:
+                      recording.transcript.isNotEmpty && !recording.isListening
+                      ? ElevatedButton(
+                          onPressed: () async {
+                            await context.read<JournalProvider>().saveEntry(
+                              recording.transcript,
+                            );
+                            recording.reset();
+                            if (context.mounted) Navigator.pop(context);
+                          },
+                          child: const Text('Save entry'),
+                        )
+                      : null,
+                ),
               ],
             ),
           );

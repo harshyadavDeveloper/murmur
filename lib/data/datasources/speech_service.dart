@@ -4,17 +4,19 @@ import 'package:speech_to_text/speech_to_text.dart';
 class SpeechService {
   final SpeechToText _speech = SpeechToText();
   bool _isInitialized = false;
+  void Function(String status)? _onStatusCallback;
 
-  Future<bool> initialize() async {
+  Future<bool> initialize({void Function(String status)? onStatus}) async {
+    _onStatusCallback = onStatus;
+
     if (_isInitialized) return true;
+
     _isInitialized = await _speech.initialize(
+      onStatus: (status) => _onStatusCallback?.call(status),
       onError: (error) => Logger.error('Speech error: $error'),
-      onStatus: (status) => Logger.error('Speech status: $status'),
     );
     return _isInitialized;
   }
-
-  bool get isListening => _speech.isListening;
 
   Future<void> startListening({
     required void Function(String text) onResult,
@@ -22,8 +24,11 @@ class SpeechService {
     await _speech.listen(
       onResult: (result) => onResult(result.recognizedWords),
       listenOptions: SpeechListenOptions(
+        partialResults: true,
         cancelOnError: true,
         listenMode: ListenMode.dictation,
+        listenFor: const Duration(minutes: 5),
+        pauseFor: const Duration(seconds: 5),
       ),
     );
   }
