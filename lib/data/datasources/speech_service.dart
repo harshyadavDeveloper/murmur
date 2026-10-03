@@ -21,9 +21,10 @@ class SpeechService {
   }) async {
     await _speech.listen(
       onResult: (result) => onResult(result.recognizedWords),
-      listenFor: const Duration(minutes: 5),
-      pauseFor: const Duration(seconds: 5),
-      listenOptions: SpeechListenOptions(cancelOnError: true),
+      listenOptions: SpeechListenOptions(
+        cancelOnError: true,
+        listenMode: ListenMode.dictation,
+      ),
     );
   }
 

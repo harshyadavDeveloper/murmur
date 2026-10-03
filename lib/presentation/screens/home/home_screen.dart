@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:murmur/presentation/screens/search/search_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'package:murmur/presentation/providers/journal_provider.dart';
@@ -10,7 +11,20 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Murmur')),
+      appBar: AppBar(
+        title: const Text('Murmur'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const SearchScreen()),
+              );
+            },
+          ),
+        ],
+      ),
       body: Consumer<JournalProvider>(
         builder: (context, provider, _) {
           if (provider.isLoading && provider.entries.isEmpty) {
